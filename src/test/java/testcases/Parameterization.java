@@ -42,7 +42,6 @@ public class Parameterization {
 		for (i = 1; i < rows; i++) {
 			for (j = 0; j <cols; j++) {
 				data[i-1][j] = excel.getCellData("LoginTest", i, j);
-				System.out.println(i+":"+j+" "+data[i-1][j]);
 			}
 		}
 

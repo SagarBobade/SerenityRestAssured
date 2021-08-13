@@ -2,11 +2,15 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import net.thucydides.junit.annotations.TestData;
 
 public class ExcelReader_my {
 
@@ -53,17 +57,28 @@ public class ExcelReader_my {
 
 		int index = workbook.getSheetIndex(sheetName);
 		sheet = workbook.getSheetAt(index);
-//		row = sheet.getRow(0);
-//		// finding columname
-//		for (int i = 0; i < row.getLastCellNum(); i++) {
-//			if (row.getCell(i).getStringCellValue().trim().equals(columnName.trim())) {
-//				colNum = i;
-//			}
-//		}
-
-		// System.out.println("cell value is "+ sheet.getRow(1).getCell(0).toString());
 		cellData = sheet.getRow(rowNum).getCell(columnNum).toString();
 		return cellData;
 	}
+	
+	public static Collection<Object[]> testData() {
+		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
+		
+		Object[][] data = new Object[excel.getRowCount("LoginTest")-1][excel.getColumnCount("LoginTest")];
+		int i = 0, j = 0;
+
+		int rows = excel.getRowCount("LoginTest");		
+		int cols = excel.getColumnCount("LoginTest");
+
+		for (i = 1; i < rows; i++) {
+			for (j = 0; j <cols; j++) {
+				data[i-1][j] = excel.getCellData("LoginTest", i, j);
+				System.out.println(i+":"+j+" "+data[i-1][j]);
+			}
+		}
+
+		return Arrays.asList(data);
+	}
+
 
 }

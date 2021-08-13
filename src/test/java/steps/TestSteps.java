@@ -26,7 +26,7 @@ public class TestSteps {
 	@Step("Send post request for user creation with name:{0}, job:{1}")
 	public void sendPostRequestForUsers(String name, String job) {
 
-		System.out.println(name + " "+ job);
+		//System.out.println(name + " "+ job);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("name", name);
 		map.put("job", job);

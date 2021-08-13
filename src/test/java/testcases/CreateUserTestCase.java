@@ -20,62 +20,30 @@ import utilities.ExcelReader_my;
 		"As a Serenity Runner",
 		"We need to Integrate Excel Reading"})
 @RunWith(SerenityParameterizedRunner.class)
-//@UseTestDataFrom(".//src//test//resources//testdata//users.xlsx")
 public class CreateUserTestCase extends BaseTest {
 
 	@Steps
 	TestSteps api;
 
-	// private String name;
-	// private String job;
-	private String cellData;
+	private String name;
+	private String job;
 
-//	public CreateUserTestCase(String name, String job) {
-//		this.name = name;
-//		this.job = job;
-//	}
-
-	public CreateUserTestCase(String cellData) {
-		this.cellData = cellData;
+	public CreateUserTestCase(String name, String job) {
+		this.name = name;
+		this.job = job;
 	}
 
 	@TestData
 	public static Collection<Object[]> testData() {
-
-		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//users.xlsx");
-
-		String sheetName = "users";
-		int rows = excel.getRowCount(sheetName);
-//		System.out.println(rows);
-	//	String cellData = excel.getCellData("users", "name", "2");
-		System.out.println("okkk");
-	//	System.out.println(cellData);
 		
-		Object[][] data = new Object[2][2];
-		
-//		data[0][0] = excel.getCellData(sheetName, 0, 2); 
-//		  data[0][1] = excel.getCellData(sheetName, 1, 2);
-//		  
-//		  
-//		  
-//		  data[1][0] = excel.getCellData(sheetName, 0, 3); 
-//		  data[1][1] = excel.getCellData(sheetName, 1, 3);
-		
-		data[0][0] = "a";
-		data[0][1] = "b";
-		data[1][0] = "c";
-		data[1][1] = "d";
-								
-		 
-		 return Arrays.asList(data);
-		//return cellData;
+		 return ExcelReader_my.testData();
 	}
 
+	
 	@Title("Executing Test")
 	@Test
 	public void temp() {
-		// here i should consume testdata
-		System.out.println("In Temp method.....");
-		System.out.println(cellData);
+		
+		api.sendPostRequestForUsers(name, job);
 	}
 }

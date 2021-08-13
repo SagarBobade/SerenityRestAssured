@@ -115,9 +115,9 @@
 				<configuration>
 					<includes>
 
-						<include>**/testcases/Parameterization.java</include>						
+						<!--<include>**/testcases/Parameterization.java</include>-->						
 						<!--<include>**/testcases/**/*.java</include>-->
-						<!--<include>**/testcases/CreateUserTest.java</include> -->
+						<include>**/testcases/CreateUserTestCase.java</include>
 
 					</includes>
 					<!-- <parallel>classes</parallel> <threadCount>5</threadCount> <forkCount>3C</forkCount> -->
