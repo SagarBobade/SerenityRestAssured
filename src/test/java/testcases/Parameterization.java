@@ -15,7 +15,6 @@ import utilities.ExcelReader_my;
 @Narrative(text = { "In order to Run Parameterized test", "As a Serenity Runner",
 		"We need to Integrate Excel Reading" })
 @RunWith(SerenityParameterizedRunner.class)
-//@Concurrent(threads = "4")
 public class Parameterization {
 
 	private String username;
@@ -23,7 +22,6 @@ public class Parameterization {
 
 	public Parameterization(String username, String password) {
 
-		System.out.println("In constructor");
 		this.username = username;
 		this.password = password;
 
@@ -31,29 +29,22 @@ public class Parameterization {
 
 	@TestData
 	public static Collection<Object[]> testData() {
-		Object[][] data = new Object[8][2];
 		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
 		System.out.println(excel.getRowCount("LoginTest") +" :: "+ excel.getColumnCount("LoginTest"));
 		
 		
-		//Object[][] data = new Object[excel.getRowCount("LoginTest")][excel.getColumnCount("LoginTest")];
+		Object[][] data = new Object[excel.getRowCount("LoginTest")-1][excel.getColumnCount("LoginTest")];
 		int i = 0, j = 0;
-//
-		int rows = excel.getRowCount("LoginTest");
-//		System.out.println("Rows: "+rows);
 
-		for (i = 0; i < rows; i++) {
-			for (j = 0; j < excel.getColumnCount("LoginTest"); j++) {
-				//System.out.println(i+" X "+j);
-				data[i][j] = excel.getCellData("LoginTest", i, j);
-				System.out.println(i+":"+j+" "+data[i][j]);
+		int rows = excel.getRowCount("LoginTest");		
+		int cols = excel.getColumnCount("LoginTest");
+
+		for (i = 1; i < rows; i++) {
+			for (j = 0; j <cols; j++) {
+				data[i-1][j] = excel.getCellData("LoginTest", i, j);
+				System.out.println(i+":"+j+" "+data[i-1][j]);
 			}
 		}
-
-//		data[0][0] = "a";
-//		data[0][1] = "b";
-//		data[1][0] = "c";
-//		data[1][1] = "d";
 
 		return Arrays.asList(data);
 	}
@@ -67,5 +58,4 @@ public class Parameterization {
 		System.out.println(password);
 		System.out.println("----next iteration----");
 	}
-
 }

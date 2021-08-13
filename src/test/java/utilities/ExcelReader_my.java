@@ -47,7 +47,7 @@ public class ExcelReader_my {
 		return colCount;
 	}
 
-	public String getCellData(String sheetName, int columnNum, int rowNum) {
+	public String getCellData(String sheetName, int rowNum, int columnNum) {
 		String cellData = null;
 		int colNum = -1;
 
