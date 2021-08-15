@@ -5,21 +5,22 @@ import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import net.thucydides.junit.annotations.TestData;
 
 public class ExcelReader_my {
 
 	public String path;
 	public FileInputStream fis = null;
 	public FileOutputStream fos = null;
-	public XSSFWorkbook workbook = null;
-	public XSSFSheet sheet = null;
-	public XSSFRow row = null;
+	public static XSSFWorkbook workbook = null;
+	public static XSSFSheet sheet = null;
+	public static XSSFRow row = null;
 	public XSSFCell cell = null;
 
 	public ExcelReader_my(String path) {
@@ -40,7 +41,7 @@ public class ExcelReader_my {
 		if (index == -1) {
 			return 0;
 		} else {
-			int rowCount = sheet.getLastRowNum();
+			int rowCount = sheet.getPhysicalNumberOfRows();
 			return rowCount+1;
 		}
 	}
@@ -61,24 +62,58 @@ public class ExcelReader_my {
 		return cellData;
 	}
 	
-	public static Collection<Object[]> testData() {
+	//public static Collection<Object[]> testData() {
+	public static Object[][] testData() {
 		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
 		
-		Object[][] data = new Object[excel.getRowCount("LoginTest")-1][excel.getColumnCount("LoginTest")];
+		Object[][] data = new Object[excel.getRowCount("LoginTest")-4][excel.getColumnCount("LoginTest")];
 		int i = 0, j = 0;
 
 		int rows = excel.getRowCount("LoginTest");		
 		int cols = excel.getColumnCount("LoginTest");
-
+		sheet = workbook.getSheet("LoginTest");
+		
+		System.out.println(rows+" : "+cols);
 		for (i = 1; i < rows; i++) {
 			for (j = 0; j <cols; j++) {
+				
+				if(!isRowEmpty(sheet.getRow(i))) {
+					System.out.println("now in row "+ i);
 				data[i-1][j] = excel.getCellData("LoginTest", i, j);
-				System.out.println(i+":"+j+" "+data[i-1][j]);
+				
+				System.out.println(i+":"+j+" "+data[i-1][j]+data[i-1][j].getClass().getSimpleName());
+				
+				}
 			}
 		}
+System.out.println("bobade");
+	//	return Arrays.asList(data);
+	return data;
 
-		return Arrays.asList(data);
+		
+		
+//		Object[][] data = new Object[1][4];
+//		 data[0][0] = "a";
+//		  data[0][1] = "b";
+//		  data[0][2] = "c";
+//		  data[0][3] = "d";
+//			return data;
+		  
+//			return Arrays.asList(data);
 	}
 
-
+	private static boolean isRowEmpty(Row row) {
+		if (row == null) {
+		return true;
+		}
+		if (row.getLastCellNum() <= 0) {
+		return true;
+		}
+		for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
+		Cell cell = row.getCell(c);
+		if (cell != null && cell.getCellType() != CellType.BLANK)
+		return false;
+		}
+		return true;
+		}
 }

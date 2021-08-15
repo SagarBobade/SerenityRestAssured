@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 
+
 	<properties>
 		<serenity.version>2.0.81</serenity.version>
 		<serenity.maven.version>2.0.81</serenity.maven.version>
@@ -18,7 +19,12 @@
 
 
 	<dependencies>
-
+<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20090211</version>
+</dependency>
 
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
@@ -156,5 +162,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

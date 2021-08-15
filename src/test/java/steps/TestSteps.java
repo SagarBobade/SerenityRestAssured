@@ -3,6 +3,11 @@ package steps;
 import java.util.HashMap;
 
 import org.hamcrest.Matchers;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -24,14 +29,20 @@ public class TestSteps {
 	}
 
 	@Step("Send post request for user creation with name:{0}, job:{1}")
-	public void sendPostRequestForUsers(String name, String job) {
+	public void sendPostRequestForUsers(String requestURL, String requestBody, String responseCode, String method) throws Exception {
+
+		System.out.println("sagar");
 
 		//System.out.println(name + " "+ job);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("name", name);
-		map.put("job", job);
-
-		Response response = SerenityRest.given().contentType(ContentType.JSON).body("").log().all().post();
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("requestURL", requestURL);
+//		map.put("requestBody", requestBody);
+//		map.put("responseCode",responseCode); 
+//		map.put("method",method);
+//		JSONArray array = new JSONArray(requestBody);  
+		JSONObject object = new JSONObject(requestBody);  	
+		
+		Response response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
 
 		response.prettyPrint();
 		System.out.println("Status Code: " + response.getStatusCode());
