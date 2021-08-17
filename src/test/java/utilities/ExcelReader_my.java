@@ -2,6 +2,8 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -10,6 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import net.thucydides.junit.annotations.TestData;
 
 public class ExcelReader_my {
 
@@ -30,12 +34,15 @@ public class ExcelReader_my {
 
 			workbook = new XSSFWorkbook(fis);
 
-			fis.close();
+		//	fis.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+
+
+	
 	public int getRowCount(String sheetName) {
 		int index = workbook.getSheetIndex(sheetName);
 
@@ -72,7 +79,7 @@ public class ExcelReader_my {
 		// Object[][] data = new Object[excel.getRowCount(sheetName) -
 		// 5][excel.getColumnCount(sheetName)];
 		System.out.println("in test data fun: "+sheetName);
-		kk = getFilledRows(sheet);
+		kk = getFilledRows(sheet.getSheetName());
 		System.out.println("initially kk is: " + kk);
 		Object[][] data = new Object[kk-1][excel.getColumnCount(sheetName)];
 		int i = 0, j = 0;
@@ -99,12 +106,13 @@ public class ExcelReader_my {
 		return data;
 	}
 
-	private static int getFilledRows(XSSFSheet sheet2) {
+	public static int getFilledRows(String sheet2) {
 		int i = 0;
-		System.out.println("in fun");
-
+		System.out.println("in fun2");
+		XSSFSheet currentSheet = workbook.getSheet(sheet2);
+		System.out.println("a bc");
 		try {
-		while (sheet2.getRow(i).getCell(i).getCellType() != CellType.BLANK) {
+		while (currentSheet.getRow(i).getCell(i).getCellType() != CellType.BLANK) {
 			i++;
 			System.out.println("in while");
 		}

@@ -19,49 +19,30 @@ import utilities.ExcelReader_my;
 		"As a Serenity Runner",
 		"We need to Integrate Excel Reading"})
 @RunWith(SerenityParameterizedRunner.class)
-
 public class RegisterUser extends BaseTest {
-
-	private String requestURL;
-	private String requestBody;
-	private String responseCode;
-	private String method;
 	
 	public RegisterUser(String requestURL, String requestBody, String responseCode, String method) {
-		this.requestURL = requestURL;
-		this.requestBody = requestBody;
-		this.responseCode = responseCode;
-		this.method = method;
-		
+		super(requestURL, requestBody, responseCode, method);
 	}
-	
-	
+
 	@TestData
 	public static Collection<Object[]> TestData() {
 		
-		Object[][] data = new Object[1][4];
-//		 data[0][0] = "a";
-//		  data[0][1] = "b";
-//		  data[0][2] = "c";
-//		  data[0][3] = "d";
-//		  
-//			return Arrays.asList(data);
-    	 Object[][] data2 = new Object[1][4];
-		 data2 = ExcelReader_my.testData("RegisterUserTest");
-    	System.out.println("after regi user get data");
-		 return Arrays.asList(data2);	
+		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
+		int rows = excel.getFilledRows("RegisterUserTest");
+		Object[][] data2 = new Object[1][rows];
+		data2 = excel.testData("RegisterUserTest");
+		return Arrays.asList(data2);	
 	}
 	
 	@Steps
 	TestSteps api;
 	
-	@Title("Executing Login Test")
+	@Title("Executing registration Test")
 	@Test
 	public void loginTest() throws Exception {
-		
-		System.out.println("sasg "+requestURL);
-//		System.out.println(requestURL+"\n"+requestBody+"\n"+responseCode+"\n"+method);
-		RestAssured.basePath = requestURL;
+    
+	RestAssured.basePath = requestURL;
 	api.sendPostRequestForUsers(requestBody, responseCode);
 	api.validateResponseCode(200);
 	}

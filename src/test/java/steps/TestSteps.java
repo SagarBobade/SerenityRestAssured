@@ -28,6 +28,7 @@ public class TestSteps {
 	@Step("Send post request for user creation with name:{0}, job:{1}")
 	public void sendPostRequestForUsers(String requestBody, String responseCode) throws Exception {
 
+		
 		JSONObject object = new JSONObject(requestBody);  	
 		
 		response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
