@@ -1,13 +1,7 @@
 package steps;
 
-import java.util.HashMap;
-
 import org.hamcrest.Matchers;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.google.gson.Gson;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -22,45 +16,42 @@ public class TestSteps {
 	public void sendGetRequestForUsers() {
 
 		response = SerenityRest.given().when().get();
+		
 		response.prettyPrint();
+		
 		response.then().statusCode(200);
 
 		response.then().body("total", Matchers.equalTo(12));
 	}
 
+	
 	@Step("Send post request for user creation with name:{0}, job:{1}")
-	public void sendPostRequestForUsers(String requestURL, String requestBody, String responseCode, String method) throws Exception {
+	public void sendPostRequestForUsers(String requestBody, String responseCode) throws Exception {
 
-		System.out.println("sagar");
-
-		//System.out.println(name + " "+ job);
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("requestURL", requestURL);
-//		map.put("requestBody", requestBody);
-//		map.put("responseCode",responseCode); 
-//		map.put("method",method);
-//		JSONArray array = new JSONArray(requestBody);  
 		JSONObject object = new JSONObject(requestBody);  	
 		
-		Response response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
+		response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
 
 		response.prettyPrint();
-		System.out.println("Status Code: " + response.getStatusCode());
 	}
 
+	
 	@Step("Send delete request for user deletion with id:{0}")
 	public void sendDeleteRequestForUsers(String id) {
 
 		response = SerenityRest.given().when().delete(id);
+		
 		System.out.println("Status Code: " + response.getStatusCode());
 	}
 
+	
 	@Step("Validate response code with expected:{0}")
-	public void validateResponseCode(int expectedStatusCode) {
+	public void validateResponseCode(int responseCode) {
 
-		System.out.println("Status Code: " + response.then().statusCode(expectedStatusCode));
+		System.out.println("Status Code: " + response.then().statusCode(responseCode));
 	}
 
+	
 	@Step("Validate response body with expected key:{0}, value:{1}")
 	public void validateResponseBody(String key, String value) {
 
@@ -68,7 +59,7 @@ public class TestSteps {
 	}
 	
 	
-	
+
 	
 	
 	
