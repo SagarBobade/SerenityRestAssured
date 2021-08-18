@@ -19,7 +19,7 @@ public class TestSteps {
 		
 		response.prettyPrint();
 		
-		response.then().statusCode(200);
+		response.then().statusCode(200); 
 
 		response.then().body("total", Matchers.equalTo(12));
 	}

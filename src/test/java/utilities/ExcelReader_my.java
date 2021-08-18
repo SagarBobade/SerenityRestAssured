@@ -17,7 +17,7 @@ import net.thucydides.junit.annotations.TestData;
 
 public class ExcelReader_my {
 
-	public String path;
+	public String path; 
 	public FileInputStream fis = null;
 	public FileOutputStream fos = null;
 	public static XSSFWorkbook workbook = null;

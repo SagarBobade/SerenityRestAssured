@@ -23,7 +23,7 @@ public class RegisterUser extends BaseTest {
 	
 	public RegisterUser(String requestURL, String requestBody, String responseCode, String method) {
 		super(requestURL, requestBody, responseCode, method);
-	}
+	} 
 
 	@TestData
 	public static Collection<Object[]> TestData() {

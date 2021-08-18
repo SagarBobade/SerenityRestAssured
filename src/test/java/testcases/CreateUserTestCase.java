@@ -22,7 +22,7 @@ public class CreateUserTestCase extends BaseTest {
 
 	public CreateUserTestCase(String requestURL, String requestBody, String responseCode, String method) {
 		super(requestURL, requestBody, responseCode, method);
-	}
+	} 
 
 	@TestData
 	public static Collection<Object[]> testData() {

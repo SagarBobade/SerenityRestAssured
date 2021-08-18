@@ -8,7 +8,7 @@ public class BaseTest {
 	protected String requestURL;
 	protected String requestBody;
 	protected String responseCode;
-	protected String method;
+	protected String method; 
 	
 	public BaseTest(String requestURL, String requestBody, String responseCode, String method) {
 		this.requestURL = requestURL;
