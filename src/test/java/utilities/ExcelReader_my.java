@@ -96,7 +96,7 @@ public class ExcelReader_my {
 
 					data[i - 1][j] = excel.getCellData(sheetName, i, j);
 					System.out.println(i + ":" + j + " " + data[i - 1][j] + data[i - 1][j]);
-				//	System.out.println(i + ":" + j + " " + data[i - 1][j] + data[i - 1][j].getClass().getSimpleName());
+					System.out.println(i + ":" + j + " " + data[i - 1][j] + data[i - 1][j].getClass().getSimpleName());
 				}
 			}
 		}

@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 
 import io.restassured.RestAssured;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
+import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Narrative;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -37,12 +38,12 @@ public class CreateUserTestCase extends BaseTest {
 	@Steps
 	TestSteps api;
 
-	@Title("Executing Login Test")
+	@Title("Executing Create User Test")
 	@Test
-	public void loginTest() throws Exception {	
+	public void createUserTestCase() throws Exception {	
 		RestAssured.basePath = requestURL;
-		api.sendPostRequestForUsers(requestBody, responseCode);
-		api.validateResponseCode(201);
+		api.sendPostRequest(requestBody, responseCode);
+		api.validateResponseCode(responseCode);
 	}
 
 }

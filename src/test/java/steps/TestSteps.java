@@ -2,6 +2,7 @@ package steps;
 
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
+import org.junit.Assert;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -26,11 +27,10 @@ public class TestSteps {
 
 	
 	@Step("Send post request for user creation with name:{0}, job:{1}")
-	public void sendPostRequestForUsers(String requestBody, String responseCode) throws Exception {
-
+	public void sendPostRequest(String requestBody, String responseCode) throws Exception {
 		
 		JSONObject object = new JSONObject(requestBody);  	
-		
+		System.out.println("in post");
 		response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
 
 		response.prettyPrint();
@@ -46,10 +46,9 @@ public class TestSteps {
 	}
 
 	
-	@Step("Validate response code with expected:{0}")
-	public void validateResponseCode(int responseCode) {
-
-		System.out.println("Status Code: " + response.then().statusCode(responseCode));
+	@Step("Validate response code with expected")
+	public void validateResponseCode(String responseCode) {
+		Assert.assertEquals(response.getStatusCode(), (int)Math.round(Float.parseFloat(responseCode)));
 	}
 
 	
@@ -58,11 +57,5 @@ public class TestSteps {
 
 		response.then().body(key, Matchers.equalTo(Integer.parseInt(value)));
 	}
-	
-	
-
-	
-	
-	
 	
 }

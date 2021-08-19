@@ -19,13 +19,4 @@ public class BaseTest {
 		RestAssured.baseURI= "https://reqres.in";
 		
 	}
-	
-//	
-//	@BeforeClass
-//	public static void inIt() {
-//		
-//		System.out.println("In before class tag in Base Test");
-//		RestAssured.baseURI= "https://reqres.in";
-//		//RestAssured.basePath= "";
-//	}
 }

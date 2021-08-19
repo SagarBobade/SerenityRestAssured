@@ -43,8 +43,8 @@ public class RegisterUser extends BaseTest {
 	public void loginTest() throws Exception {
     
 	RestAssured.basePath = requestURL;
-	api.sendPostRequestForUsers(requestBody, responseCode);
-	api.validateResponseCode(200);
+	api.sendPostRequest(requestBody, responseCode);
+	//api.validateResponseCode(responseCode);
 	}
 	
 }
