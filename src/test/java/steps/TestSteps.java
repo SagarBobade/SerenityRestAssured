@@ -13,8 +13,8 @@ public class TestSteps {
 
 	private Response response;
 
-	@Step("Send get request for users list")
-	public void sendGetRequestForUsers() {
+	@Step("Send get request")
+	public void sendGetRequest() {
 
 		response = SerenityRest.given().when().get();
 		
@@ -26,7 +26,7 @@ public class TestSteps {
 	}
 
 	
-	@Step("Send post request for user creation with name:{0}, job:{1}")
+	@Step("Send post request for request body: {0}, and expected response code: {1}")
 	public void sendPostRequest(String requestBody, String responseCode) throws Exception {
 		
 		JSONObject object = new JSONObject(requestBody);  	
@@ -37,8 +37,8 @@ public class TestSteps {
 	}
 
 	
-	@Step("Send delete request for user deletion with id:{0}")
-	public void sendDeleteRequestForUsers(String id) {
+	@Step("Send delete request to delete: {0}")
+	public void sendDeleteRequest(String id) {
 
 		response = SerenityRest.given().when().delete(id);
 		

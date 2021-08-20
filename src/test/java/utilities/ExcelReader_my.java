@@ -2,8 +2,10 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Properties;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -26,11 +28,11 @@ public class ExcelReader_my {
 	public XSSFCell cell = null;
 	private static int kk = 0;
 
-	public ExcelReader_my(String path) {
-		this.path = path;
+	public ExcelReader_my() {
 
 		try {
-			fis = new FileInputStream(path);
+			
+			fis = new FileInputStream(getValueOfKey("TestDataFile"));
 
 			workbook = new XSSFWorkbook(fis);
 
@@ -74,7 +76,7 @@ public class ExcelReader_my {
 
 	// public static Collection<Object[]> testData() {
 	public static Object[][] testData(String sheetName) {
-		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
+		ExcelReader_my excel = new ExcelReader_my();
 		sheet = workbook.getSheet(sheetName);
 		// Object[][] data = new Object[excel.getRowCount(sheetName) -
 		// 5][excel.getColumnCount(sheetName)];
@@ -140,4 +142,20 @@ public class ExcelReader_my {
 		return true;
 	}
 
+	public String getValueOfKey(String key) {
+		 Properties prop;
+		 InputStream input;
+		 String value = null;
+		 
+		prop = new Properties();
+		try {
+			input = new FileInputStream(".//myProp.properties");
+			prop.load(input);
+			value = prop.getProperty(key);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	return value;
+	}
 }

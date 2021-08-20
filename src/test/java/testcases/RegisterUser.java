@@ -28,7 +28,7 @@ public class RegisterUser extends BaseTest {
 	@TestData
 	public static Collection<Object[]> TestData() {
 		
-		ExcelReader_my excel = new ExcelReader_my(".//src//test//resources//testdata//data.xlsx");
+		ExcelReader_my excel = new ExcelReader_my();
 		int rows = excel.getFilledRows("RegisterUserTest");
 		Object[][] data2 = new Object[1][rows];
 		data2 = excel.testData("RegisterUserTest");
