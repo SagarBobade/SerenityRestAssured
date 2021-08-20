@@ -13,7 +13,7 @@ import net.thucydides.core.annotations.Narrative;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
-import steps.TestSteps;
+import steps.API;
 import utilities.ExcelReader_my;
 
 @Narrative(text = { "In order to Run Parameterized test", "As a Serenity Runner",
@@ -36,7 +36,7 @@ public class CreateUserTestCase extends BaseTest {
 	}
 
 	@Steps
-	TestSteps api;
+	API api;
 
 	@Title("Executing Create User Test")
 	@Test

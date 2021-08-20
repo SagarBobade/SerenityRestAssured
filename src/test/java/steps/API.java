@@ -9,9 +9,10 @@ import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
-public class TestSteps {
+public class API {
 
 	private Response response;
+	private JSONObject object;
 
 	@Step("Send get request")
 	public void sendGetRequest() {
@@ -20,22 +21,26 @@ public class TestSteps {
 		
 		response.prettyPrint();
 		
-		response.then().statusCode(200); 
-
-		response.then().body("total", Matchers.equalTo(12));
 	}
 
 	
-	@Step("Send post request for request body: {0}, and expected response code: {1}")
+	@Step("Send post request for request body: {0}")
 	public void sendPostRequest(String requestBody, String responseCode) throws Exception {
 		
-		JSONObject object = new JSONObject(requestBody);  	
+		object = new JSONObject(requestBody);  	
 		System.out.println("in post");
 		response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().post();
-
 		response.prettyPrint();
 	}
 
+	@Step("Send put request with updated body: {0}")
+	public void sendPutRequest(String requestBody, String responseCode) throws Exception {
+		object = new JSONObject(requestBody);  	
+		System.out.println("in put");
+		System.out.println(requestBody);
+		response = SerenityRest.given().contentType(ContentType.JSON).body(object.toString()).log().all().put();
+		System.out.println(response.getStatusCode());
+	}
 	
 	@Step("Send delete request to delete: {0}")
 	public void sendDeleteRequest(String id) {
@@ -48,14 +53,16 @@ public class TestSteps {
 	
 	@Step("Validate response code with expected")
 	public void validateResponseCode(String responseCode) {
+		System.out.println("heyya"+responseCode+" : "+response.getStatusCode());
 		Assert.assertEquals(response.getStatusCode(), (int)Math.round(Float.parseFloat(responseCode)));
 	}
 
 	
 	@Step("Validate response body with expected key:{0}, value:{1}")
-	public void validateResponseBody(String key, String value) {
+	public void validateResponseBody(String expected) {
 
-		response.then().body(key, Matchers.equalTo(Integer.parseInt(value)));
+		System.out.println("hey ya"+expected);
+		response.then().assertThat().extract().path("name", expected);
 	}
 	
 }

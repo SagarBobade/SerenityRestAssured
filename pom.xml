@@ -123,8 +123,9 @@
 
 						<!--<include>**/testcases/Parameterization.java</include>-->						
 						<!--<include>**/testcases/**/*.java</include>-->
-						<include>**/testcases/CreateUserTestCase.java</include>
-						<include>**/testcases/RegisterUser.java</include>
+						<!--<include>**/testcases/CreateUserTestCase.java</include>-->
+						<!--<include>**/testcases/RegisterUser.java</include>-->
+						<include>**/testcases/EditUser.java</include>
 
 					</includes>
 					<!-- <parallel>classes</parallel> <threadCount>5</threadCount> <forkCount>3C</forkCount> -->

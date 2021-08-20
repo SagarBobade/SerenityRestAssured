@@ -15,18 +15,18 @@ import net.thucydides.junit.annotations.TestData;
 import steps.API;
 import utilities.ExcelReader_my;
 
-@Narrative(text={"In order to Run Parameterized test",
-		"As a Serenity Runner",
-		"We need to Integrate Excel Reading"})
+
+@Narrative(text = { "In order to Run Parameterized test", "As a Serenity Runner",
+		"We need to Integrate Excel Reading" })
 @RunWith(SerenityParameterizedRunner.class)
-public class RegisterUser extends BaseTest {
-	
-	public RegisterUser(String requestURL, String requestBody, String responseCode, String method) {
+public class EditUser extends BaseTest {
+
+	public EditUser(String requestURL, String requestBody, String responseCode, String method) {
 		super(requestURL, requestBody, responseCode, method);
 	} 
 
 	@TestData
-	public static Collection<Object[]> TestData() {
+	public static Collection<Object[]> testData() {
 		
 		ExcelReader_my excel = new ExcelReader_my();
 		int rows = excel.getFilledRows("RegisterUserTest");
@@ -34,17 +34,17 @@ public class RegisterUser extends BaseTest {
 		data2 = excel.testData("RegisterUserTest");
 		return Arrays.asList(data2);	
 	}
-	
+
 	@Steps
 	API api;
-	
-	@Title("Executing registration Test")
+
+	@Title("Executing Edit User Test")
 	@Test
-	public void loginTest() throws Exception {
-    
-	RestAssured.basePath = requestURL;
-	api.sendPostRequest(requestBody, responseCode);
-	//api.validateResponseCode(responseCode);
+	public void createUserTestCase() throws Exception {	
+		RestAssured.basePath = requestURL;
+		api.sendPutRequest(requestBody, responseCode);
+		api.validateResponseCode(responseCode);
+		api.validateResponseBody("morpheus");
+
 	}
-	
 }
