@@ -29,9 +29,9 @@ public class CreateUserTestCase extends BaseTest {
 	public static Collection<Object[]> testData() {
 		
 		ExcelReader_my excel = new ExcelReader_my();
-		int rows = excel.getFilledRows("LoginTest");
+		int rows = excel.getFilledRows("CreateUserTest");
 		Object[][] data2 = new Object[1][rows];
-		data2 = excel.testData("LoginTest");
+		data2 = excel.testData("CreateUserTest");
 		return Arrays.asList(data2);	
 	}
 

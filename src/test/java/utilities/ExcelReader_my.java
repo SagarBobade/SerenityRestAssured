@@ -111,7 +111,9 @@ public class ExcelReader_my {
 	public static int getFilledRows(String sheet2) {
 		int i = 0;
 		System.out.println("in fun2");
+		System.out.println(sheet2);
 		XSSFSheet currentSheet = workbook.getSheet(sheet2);
+		System.out.println(currentSheet.getSheetName());
 		System.out.println("a bc");
 		try {
 		while (currentSheet.getRow(i).getCell(i).getCellType() != CellType.BLANK) {

@@ -44,7 +44,7 @@ public class RegisterUser extends BaseTest {
     
 	RestAssured.basePath = requestURL;
 	api.sendPostRequest(requestBody, responseCode);
-	//api.validateResponseCode(responseCode);
+	api.validateResponseCode(responseCode);
 	}
 	
 }

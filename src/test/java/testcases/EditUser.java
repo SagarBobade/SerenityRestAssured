@@ -29,18 +29,18 @@ public class EditUser extends BaseTest {
 	public static Collection<Object[]> testData() {
 		
 		ExcelReader_my excel = new ExcelReader_my();
-		int rows = excel.getFilledRows("RegisterUserTest");
+		int rows = excel.getFilledRows("EditUserTest");
 		Object[][] data2 = new Object[1][rows];
-		data2 = excel.testData("RegisterUserTest");
+		data2 = excel.testData("EditUserTest");
 		return Arrays.asList(data2);	
 	}
 
 	@Steps
 	API api;
 
-	@Title("Executing Edit User Test")
+	@Title("Executing Edit User Test Case")
 	@Test
-	public void createUserTestCase() throws Exception {	
+	public void editUserTestCase() throws Exception {	
 		RestAssured.basePath = requestURL;
 		api.sendPutRequest(requestBody, responseCode);
 		api.validateResponseCode(responseCode);
